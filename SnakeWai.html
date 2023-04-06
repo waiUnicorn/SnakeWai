@@ -1,0 +1,2117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Змейка в консольке</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style type="text/css">
+/* Main styles for cite */
+#error {
+	display: none;
+	position: absolute;
+	z-index: 99;
+	background-color: black;
+	color: orange;
+	font-size: 10%;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+}
+#error p {
+	margin-top: 25%;
+}
+#fullscreen {
+	display: none;
+}
+body, div, p, h1 {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background-color: #b3b3b3;
+	font-family: monospace;
+}
+p, h1, article {
+	user-select: none;
+}
+#fin, #main_menu, #pause_menu, #winer, #stats {
+	display: none;
+}
+#content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+}
+#gameArea {
+	display: inline-block;
+	padding: 0px 1px 5px 1px;
+	margin-top: 5px;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+}
+#posrel {
+	display: inline-block;
+}
+.pix {
+	font-weight: bold;
+	margin: 0px; 
+	padding-left: 0px;
+	line-height: 0.8;
+}
+#scorelist {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+	border-top:  1px solid white;
+	border-left: 1px solid black;
+	color: yellow;
+}
+#scorelist p {
+	margin: 0 5px;
+}
+.tablo {
+	position: absolute;
+	z-index: 9;
+	width: 70%; /*width: 50vw;*/
+	height: 55%;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	font-family: monospace;
+	color: white;
+	border: 1px solid white;
+	background-color: black;
+	padding: auto;
+}
+.tablo h1 {
+	margin: 5px 0;
+}
+.cell {
+	color: #FFDAB9;
+}
+#select {
+	color: #00FFFF;
+}
+button:active {
+	background-color: grey;
+}
+.control {
+	margin-top: 30px;
+}
+ .c2, .c3 {
+	display: flex;
+	justify-content: center;
+	margin: 30px;
+}
+.c1 {
+	display: flex;
+	justify-content: space-between;
+}
+#mute {
+	position: absolute;
+	left: 65%;
+}
+#left{
+	margin-right: 20px;
+}
+#right {
+	margin-left: 20px;
+}
+#stats {
+	position: absolute;
+	z-index: 9;
+	margin: 5px auto;
+	background-color: black;
+	text-align: center;
+	font-family: monospace;
+	color: white;
+}
+p {
+	font-size: 18px;
+}
+#select {
+font-size: 19px;
+}
+#statjournal p {
+	font-size: 13.8px;
+}
+button {
+	width: 50px;
+	height: 50px;
+}
+#mute {
+	width: 40px;
+	height: 40px;
+}
+.tablo p {
+	margin-top: 8px;
+}
+.tablo article {
+	margin-bottom: 25px;
+}
+
+@media (max-width: 240px) {
+	p {
+		font-size: 8px;
+	}
+	#select {
+		font-size: 9px;
+	}
+	.tablo {
+		width: 100%;
+		height: 91%;
+	}
+	.control {
+		margin-top: 10px;
+	}
+	#stats h1 {
+		font-size: 10px;
+	}
+	#statjournal p {
+		font-size: 5.9px;
+	}
+	button {
+		width: 29px;
+		height: 29px;
+	}
+	#mute {
+		width: 25px;
+		height: 25px;
+	}
+	.c2, .c3 {
+		margin: 10px;
+	}
+}
+
+@media (min-width: 241px) and (max-width: 280px) {
+	p {
+		font-size: 12px;
+	}
+	#select {
+		font-size: 13px;
+	}
+	.tablo {
+		width: 100%;
+		height: 98%;
+	}
+	#statjournal p {
+		font-size: 9px;
+	}
+	button {
+		width: 40px;
+		height: 40px;
+	}
+	#mute {
+		width: 30px;
+		height: 25px;
+	}
+	.c2, .c3 {
+		margin: 10px;
+	}
+}
+
+@media (min-width: 281px) and (max-width: 320px) {
+	p {
+		font-size: 15px;
+	}
+	#select {
+		font-size: 16px;
+	}
+	.tablo {
+		width: 100%;
+		height: 98%;
+	}
+	#statjournal p {
+		font-size: 9px;
+	}
+	button {
+		width: 40px;
+		height: 40px;
+	}
+	#mute {
+		width: 30px;
+		height: 25px;
+	}
+	.c2, .c3 {
+		margin: 10px;
+	}
+}
+
+@media (min-width: 321px) and (max-width: 376px) {
+	p {
+		font-size: 16.8px;
+	}
+	#select {
+		font-size: 17.8px;
+	}
+	#statjournal p {
+		font-size: 13px;
+	}
+	button {
+		width: 35px;
+		height: 35px;
+	}
+	#mute {
+		width: 30px;
+		height: 30px;
+	}
+	.c2, .c3 {
+		margin: 20px;
+	}
+}
+
+@media (width: 384px) and (height: 640px) {
+	p {
+		font-size: 15px;
+	}
+	#select {
+		font-size: 16px;
+	}
+	#statjournal p {
+		font-size: 11px;
+	}
+}
+
+@media (width: 320px) and (height: 480px) {
+	p {
+		font-size: 11px;
+	}
+	#select {
+		font-size: 12px;
+	}
+	#statjournal p {
+		font-size: 8px;
+	}
+	button {
+		width: 35px;
+		height: 35px;
+	}
+	#mute {
+		width: 30px;
+		height: 30px;
+	}
+	.c2, .c3 {
+		margin: 20px;
+	}
+}
+
+@media (width: 320px) and (height: 533px) {
+	p {
+		font-size: 14px;
+	}
+}
+
+@media (width: 412px) and (height: 660px) {
+	p {
+		font-size: 16px;
+	}
+	#statjournal p {
+		font-size: 12px;
+	}
+}
+
+@media (width: 360px) and (height: 567px) {
+	p {
+		font-size: 15px;
+	}
+	#select {
+		font-size: 17.8px;
+	}
+	#statjournal p {
+		font-size: 11px;
+	}
+	button {
+		width: 35px;
+		height: 35px;
+	}
+	#mute {
+		width: 30px;
+		height: 30px;
+	}
+	.c2, .c3 {
+		margin: 20px;
+	}
+}
+
+/* Styles-Colors used by the display */
+
+.red { color: red; }
+.orange { color: orange; }
+.yellow { color: yellow; }
+.green { color: green; }
+.aqua { color: aqua; }
+.blue { color: blue; }
+.navy { color: navy; }
+.violet { color: violet; }
+.white { color: white; }
+.pink { color: pink; }
+.gray { color: gray; }
+.silver { color: silver; }
+.olive { color: olive; }
+.teal { color: teal; }
+.lime { color: lime; }
+.purple { color: purple; }
+.fuchsia { color: fuchsia; }
+.maroon { color: maroon; }
+.gold { color: #ffd700; }
+</style>
+<!--------------------------- ! --------------------------->
+<script type="text/javascript"> 'use strict';
+/////////////////////////// * Options script * \\\\\\\\\\\\\\\\\\\\\\\\\\\
+// Name html elements
+const nameElements = {
+	displayId : 'gameArea',
+	arrowControl : 'bup',
+	buttonESC : 'esc',
+	buttonOK : 'ok',
+	mainMenu : 'main_menu',
+	pauseMenu : 'pause_menu',
+	screenStats : 'stats',
+	journalStats : 'statjournal',
+	scoreScreen : 'score',
+	scrGameover : 'fin',
+	scrWin : 'winer',
+	srcAudio :  ['1jiyH4uM8DuQK5uO1zga4wYC0tI3H0lhT', '1jn9BtnYP08W0H5N9HCuOpF2wSi9foort' ], //[ 'Snake.mp3', 'Snake1.mp3' ],
+	scrRound : 'scrRound',
+	typegame : 'typegame'
+};
+
+// Options for the Display
+
+const displaySetting = {
+	nameArea : nameElements.displayId,
+	sizeStart : 0,
+	sizeWidth : 35,
+	sizeHeight : 27,
+	background : 'black',
+	pixelCh : '¡',
+	pixelColor : 'gray'
+ };
+
+// Options for the game 
+
+const  gameSetting = {
+	'stages' : {
+		len : 3,
+		type : 'С уровнями',
+		'0' : {
+			type : ' уровень ',
+			timeloop : 220,
+			autoaxe : false,
+			hasWall : false,
+			labirinte : false,
+			droptail : true,
+			caseDroptail : 0.999,
+			conDroptail : 25,
+			noclip : false,
+			caseNoclip : null,
+			slowtime: false,
+			caseSlowtime : null,
+			axetime : true,
+			caseAxetime : 0.9,
+			barrier : false,
+			caseBarrier : null,
+			barrierPcs : null,
+			backwards : true,
+			caseBackwards : 0.5,
+			nextlevel : true,
+			caseNextlevel : 0.1,
+			conNextlevel : 50
+		},
+		'1' : {
+			type : ' уровень ',
+			timeloop : 210,
+			autoaxe : false,
+			hasWall : true,
+			labirinte : false,
+			droptail : true,
+			caseDroptail : 0.999,
+			conDroptail : 40,
+			noclip : true,
+			caseNoclip : 0.9,
+			slowtime: true,
+			caseSlowtime : 0.9,
+			axetime : true,
+			caseAxetime : 0.8,
+			barrier : true,
+			caseBarrier: 0.1,
+			barrierPcs : 2,
+			backwards : true,
+			caseBackwards : 0.8,
+			nextlevel : true,
+			caseNextlevel : 0.1,
+			conNextlevel : 100
+		},
+		'2' : {
+			type : ' уровень ',
+			timeloop : 210,
+			autoaxe : true,
+			hasWall : false,
+			labirinte : true,
+			droptail : true,
+			caseDroptail : 0.99,
+			conDroptail : 50,
+			noclip : true,
+			caseNoclip : 0.9,
+			slowtime: true,
+			caseSlowtime : 0.9,
+			axetime : false,
+			caseAxetime : null,
+			barrier : true,
+			caseBarrier: 0.5,
+			barrierPcs : 1,
+			backwards : true,
+			caseBackwards : 0.8,
+			nextlevel : true,
+			caseNextlevel : 0.1,
+			conNextlevel : 1 //check here!
+		}
+	},
+	'classic' : {
+		type : 'Классическая',
+		timeloop : 220,
+		autoaxe : false,
+		hasWall : false,
+		labirinte : false,
+		droptail : true,
+		caseDroptail : 0.99,
+		conDroptail : 40,
+		noclip : false,
+		caseNoclip : null,
+		slowtime: true,
+		caseSlowtime : 0.9,
+		axetime : false,
+		caseAxetime : null,
+		barrier : false,
+		caseBarrier: null,
+		barrierPcs : null,
+		backwards : true,
+		caseBackwards : 0.8,
+		nextlevel : false,
+	},
+	'marathon' : {
+		type : 'Марафон',
+		timeloop : 230,
+		autoaxe : true,
+		hasWall : false,
+		labirinte : false,
+		droptail : false,
+		caseDroptail : null,
+		conDroptail : null,
+		noclip : false,
+		caseNoclip : null,
+		slowtime: true,
+		caseSlowtime : 0.9,
+		axetime : false,
+		caseAxetime : null,
+		barrier : true,
+		caseBarrier: 0.5,
+		barrierPcs : 4,
+		backwards : true,
+		caseBackwards : 0.8,
+		nextlevel : false,
+	}
+
+};
+
+// Design symbols for display
+
+const gameDecorrations = {
+	wallCh : '#',
+	wallColor : 'red',
+	
+	labirinteCh : '#',
+	labirinteColor: 'red',
+	
+	foodCh : '*',
+	foodColor : 'lime',
+	
+	snakeCh : 'o',
+	snakeColor : 'aqua',
+	
+	droptailCh : '&',
+	droptailColor: 'maroon',
+	
+	noclipCh : '●',
+	noclipColor : 'purple',
+	noclipHeadCh : 'о',
+	noclipHeadColor : 'purple',
+	
+	slowtimeCh : '?',
+	slowTimeColor : 'blue',
+	
+	axetimeCh : '!',
+	axetimeColor : 'pink',
+	
+	barrierWallCh : '×',
+	barrierWallColor: 'white',
+	
+	backwardsCh : '@',
+	backwardsColor : 'violet',
+	
+	nextlevelCh : '$',
+	nextlevelColor : 'gold'
+	
+};
+
+/////////////////////////// * Extra script * \\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+class Box
+{
+constructor ( selectorName ) {
+	this.$box = Box.get( selectorName );
+}
+on ( def ) {
+	if (this.$box.length) {
+		for (let i = 0; i < this.$box.length; i++) {
+			(this.$box[i]).addEventListener('click', def);
+		}
+	} else {
+		this.$box.addEventListener('click', def);
+	}
+}
+del ( def ) {
+	if (this.$box.length) {
+		for (let i = 0; i < this.$box.length; i++) {
+			(this.$box[i]).removeEventListener('click', def);
+		}
+	} else {
+		this.$box.removeEventListener('click', def);
+	}
+}
+out ( value ) {
+	this.$box.textContent = value;
+}
+html ( code ) {
+	this.$box.innerHTML = code;
+}
+getCon ( ) {
+	return this.$box.textContent;
+}
+gethtml ( ) {
+	return this.$box.innerHTML;
+}
+innerClass ( className ) {
+	let list = new Array();
+	let child = this.$box.children;
+	for (let i = 0; i < child.length; i++) {
+		if ( child[i].classList.contains(className) ) {
+			list.push(child[i]);
+		}
+	}
+	if (!list.length) list = null;
+	return list;
+}
+disabled ( bool ) {
+	let $box = this.$box;
+	let $d = 'disabled';
+	if ( bool === true ) {
+		$box.setAttribute( $d, true );
+	} else if ( bool === undefined ) {
+		return $box.getAttribute( $d );
+	} else if ( bool === false ) {
+		$box.removeAttribute( $d );
+	}
+}
+static get ( selectorName ) {
+	let d = document;
+	let id = d.getElementById(selectorName);
+	return ( id ) ? id : d.getElementsByClassName(selectorName);
+}
+static tag ( $tag ) {
+	return document.getElementsByTagName ( $tag );
+}
+static $marker (classCollection, marker ) {
+	let element = null;
+	for (let i = 0; i < classCollection.length; i++) {
+		if ( (classCollection[i]).id === marker ) {
+			element = classCollection[i];
+		}
+	}
+	return element;
+}
+static height ( element ) {
+	return element.getBoundingClientRect().height;
+}
+static width ( element ) {
+	return element.getBoundingClientRect().width;
+}
+
+ }
+
+class Era
+{
+constructor ( key ) {
+	this.key = key;
+}
+cls ( ) {
+	window.localStorage.removeItem( this.key );
+}
+get ( ) {
+	let value = window.localStorage.getItem( this.key );
+	if (value === undefined) value = null;
+	return JSON.parse( value );
+	
+}
+set ( value ) {
+	window.localStorage.setItem( this.key, (JSON.stringify(value)) );
+}
+static cls ( ) {
+	window.localStorage.clear();
+}
+
+ }
+ 
+class Tablo
+{
+constructor ( tablo, main ) {
+	this.tablo = new Box (tablo);
+	this.main = main;
+	this.cell = this.tablo.innerClass('cell');
+	this.num = 0;
+}
+ok ( val ) {
+	if ( typeof val !== 'string' ) {
+		val = this.cell[this.num].getAttribute('val');
+	}
+	this.hide();
+	if ( val === 'letsgame' || val === 'start' ) {
+		this.main.end(val);
+	} else {
+		this.main.next(val);
+	}
+}
+control ( id ) {
+	id = id.target.id;
+	
+	if ( id === 'up' || id === 'down' && this.hasId() ) {
+		this.cell[this.num].removeAttribute('id');
+	} else if ( id === 'esc' ) {
+		this.ok( 'resume' );
+	}
+	
+	if ( id === 'up' ) {
+		this.num -= 1;
+	} else if ( id === 'down' ) {
+		this.num += 1;
+	}
+	if ( this.num > this.cell.length-1) {
+		this.num = 0;
+	} else if ( this.num < 0 ) {
+		this.num = this.cell.length - 1;
+	}
+	if ( !this.hasId() ) {
+		this.cell[this.num].setAttribute('id', 'select');
+	}
+}
+hasId ( ) {
+	return this.cell[this.num].hasAttribute('id');
+}
+hide ( ) {
+	this.tablo.$box.style.display = 'none';
+}
+open ( ) {
+	if ( this.num !== 0 ) {
+		this.cell[this.num].removeAttribute('id');
+		this.num = 0;
+	}
+	
+	this.tablo.$box.style.display = 'block';
+	this.cell[this.num].setAttribute('id', 'select');
+}
+
+ }
+
+class Stats extends Tablo
+{
+constructor ( tablo, journal, storage, main, area ) {
+	super(tablo, main);
+	this.journal = new Box (journal);
+	this.storage = storage;
+	this.area = Box.get(area);
+	this.create();
+}
+create ( ) {
+	let px = 'px';
+	let $s = this.tablo.$box.style;
+	$s.width = Box.width(this.area) + px;
+	$s.height = Box.height(this.area) + px;
+}
+statsOut () {
+	this.journal.html( this.storage.read());
+}
+
+ }
+
+class Score
+{
+constructor ( outer, typegame, main ) {
+	this.outer = new Box ( outer );
+	this.typegame = new Box ( typegame );
+	this.main = main;
+	this.profit = 0;
+	this.score = 0;
+}
+incr ( ) {
+	this.score++;
+	this.scoreOut();
+}
+amount ( ) {
+	return this.profit + this.score;
+}
+scoreover ( num ) {
+	return this.score > num;
+}
+clear ( k ) {
+	this.score = 0;
+	this.scoreOut( k );
+}
+setDefault ( k ) {
+	this.profit = 0;
+	this.clear( k );
+}
+declare ( k ) {
+	this.profit = this.amount();
+	this.clear(k);
+}
+scoreOut ( k ) {
+	this.outer.out( (k) ? '' : this.amount() );
+}
+typeOut ( k ) {
+	if ( k ) {
+		this.typegame.out( '' );
+	} else {
+		let type =this.main.game.set.type;
+		let round = ( this.main.round !== null ) ? this.main.round + 1 : '';
+		this.typegame.out( type + round );
+	}
+}
+
+ }
+ 
+class FinalTablo
+{
+constructor ( fin, win, main ) {
+	this.fin = new Tablo ( fin, this );
+	this.win = new Tablo ( win, this );
+	this.main = main;
+	this.storage = this.main.storage;
+	this.score = this.main.score;
+}
+run ( ) {
+	this.$record = this.record();
+	this.$tablo = ( this.$record ) ? this.win : this.fin;
+	
+	this.$tablo.open();
+	this.Out( );
+	
+	if ( this.$record ) {
+		this.storage.add( this.main.type, FinalTablo.now(), this.score.amount() );
+		this.sideOut( );
+	}
+}
+control ( ) {
+	this.$tablo.hide();
+	this.main.clear('start');
+	if ( this.$record ) {
+		this.main.next('stats');
+	} else {
+		this.main.start( );
+	}
+	delete this.$record;
+	delete this.$tablo;
+}
+Out ( ) {
+	let tablo = ( this.$tablo ) ? this.$tablo : this.win;
+	( (tablo.tablo.innerClass('finscore'))[0] ).textContent = this.score.amount();
+}
+sideOut ( ) {
+	Box.get('scoreside').textContent = this.storage.getSide( this.main.type, this.score.amount());
+}
+record ( ) {
+	return this.storage.record( this.main.type, this.score.amount() )
+}
+static now ( ) {
+	function OO (num) {
+		if ( num < 10 ) {
+			String(num);
+			return '0' + num;
+		}
+		return num;
+	}
+	let date = new Date();
+	return `${OO(date.getDate())}.${OO(date.getMonth())}.${(String(date.getFullYear())).slice(-2)} ${OO(date.getHours())}:${OO(date.getMinutes())}`;
+}
+
+ }
+
+/////////////////////////// * Staff script * \\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+class Options
+{
+constructor ( type, stage ) {
+	if ( type ) {
+		this.set = gameSetting[type];
+		if (stage) this.set = this.set[stage];
+	}
+	this.disp = displaySetting;
+	this.art = gameDecorrations;
+}
+
+ }
+
+class Figure extends Options
+{
+constructor (  ) {
+	super();
+	this.list = new Array ( );
+}
+draw ( ) {
+	this.list.forEach(function(item){
+		item.draw();
+	});
+}
+cross ( point ) {
+	let bool = false;
+	for (let i = 0; i < this.list.length; i++) {
+		if ( this.list[i].cross(point) ) {
+			bool = true;
+		}
+	}
+	return bool;
+}
+crash ( ) {
+	for (let i = 0; i < this.list.length; i++) {
+		let fig = this.list[i];
+		display.setPix(fig.x, fig.y);
+		let pix = display.getPix() === this.disp.pixelCh;
+		display.resetPix();
+		if ( pix ) {
+			this.list[i].draw();
+		}
+	}
+}
+inspect ( ) {
+	let len = this.list.length - 1;
+	let plast = this.list[len];
+	if (plast.y >= this.disp.sizeHeight) {
+		for (let i=0; i <= len; i++) {
+			this.list[i].y -= len;
+		}
+	} else if (plast.x >= this.disp.sizeWidth) {
+		for (let i=0; i <= len; i++) {
+			this.list[i].x -= len;
+		}
+	}
+}
+
+ }
+
+class Point extends Options
+{
+constructor (x, y, ch, color, auto) {
+	super();
+	if (x === null || y === null) {
+		let obj = Point.newpoint(this.disp);
+		x = obj.x;
+		y = obj.y;
+	}
+	this.x = x;
+	this.y = y;
+	this.ch = ch;
+	this.color = color;
+	if (auto) this.draw();
+}
+draw ( ) {
+	display.setPix(this.x, this.y);
+	display.press(this.ch, this.color);
+	display.resetPix();
+}
+reset ( ) {
+	display.setPix(this.x, this.y);
+	display.press();
+	display.resetPix();
+}
+cross ( point ) {
+	return point.x === this.x && point.y === this.y;
+}
+setdot ( ) {
+	let obj = Point.newpoint(this.disp);
+	this.x = obj.x;
+	this.y = obj.y;
+	this.draw();
+}
+static isfree ( point ) {
+	let set = displaySetting;
+	display.setPix(point.x, point.y);
+	let i = display.getPix() === set.pixelCh;
+	display.resetPix();
+	return i;
+}
+static flip ( min, max ) {
+	if (Number.isInteger(min) && max !== undefined) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	} else {
+	return Math.random() >= ((min > 0 && min < 1) ? min : 0.5);
+	}
+}
+static newpoint ( ) {
+	let set = displaySetting;
+	let point = {};
+	do {
+		point.x = Point.flip(set.sizeStart, set.sizeWidth),
+		point.y = Point.flip(set.sizeStart, set.sizeHeight)
+	} while ( !(Point.isfree(point)) );
+	return point;
+}
+
+ }
+
+class HorizontalLine extends Figure
+{
+constructor ( xStart, xEnd, y, ch, color, auto ) {
+	super();
+	for(let i = xStart ; i <= xEnd; i++) {
+		this.list.push(new Point(i, y, ch, color, auto));
+	}
+	if (!auto) super.inspect();
+}
+
+ }
+ 
+class VerticalLine extends Figure
+{
+constructor ( x, yStart, yEnd, ch, color, auto ) {
+	super();
+	for(let i = yStart ; i <= yEnd; i++) {
+		this.list.push(new Point(x, i, ch, color, auto));
+	}
+	if (!auto) super.inspect();
+}
+
+ }
+
+class Food extends Point
+{
+constructor ( art ) {
+	super( null, null, art.foodCh, art.foodColor, true );
+}
+
+ }
+
+class BonBon
+{
+constructor ( i, snake, ch, color ) {
+	this.bonbon = new Point ( false, false, ch, color, false );
+	this.i = i;
+	this.snake = snake;
+}
+on ( ) {
+	if ( this.bonbon.x === false && this.bonbon.y === false ) {
+		if ( Point.flip(this.i) && Point.flip(this.i) ) {
+			this.bonbon.setdot();
+		}
+	} else {
+		if ( this.snake.tap( this.bonbon ) ) {
+			this.bonbon.x = false;
+			this.bonbon.y = false;
+			this.trigger();
+			return true;
+		}
+	}
+}
+
+ }
+ 
+class Backwards extends BonBon
+{
+constructor ( i, snake ) {
+	let art = snake.art;
+	super ( i, snake, art.backwardsCh, art.backwardsColor );
+}
+trigger ( ) {
+	this.snake.list.reverse();
+	this.snake.list[0].offset = (this.snake.list[0].offset === 1) ? -1 : 1;
+	this.snake.axis = this.snake.list[0].axis;
+	this.snake.offset = this.snake.list[0].offset;
+}
+
+ }
+
+class Droptail extends BonBon
+{
+constructor ( i, snake, game ) {
+	let art = snake.art;
+	super ( i, snake, art.droptailCh, art.droptailColor );
+	this.con = game.set.conDroptail;
+}
+on ( ) {
+	if (this.snake.list.length > this.con) { super.on(); }
+}
+trigger ( ) {
+	while ( this.snake.list.length  > 3 ) {
+		this.snake.list[ this.snake.list.length - 1 ].reset();
+		this.snake.list.pop();
+	}
+}
+
+ }
+
+class Noclip extends BonBon
+{
+constructor (i, snake, ch, color) {
+	let art = snake.art;
+	ch = (ch) ? ch : art.noclipCh;
+	color = (color) ? color : art.noclipColor;
+	super ( i, snake, ch, color );
+	this.active = false;
+}
+on ( ) {
+	if (!this.active) {
+	if (super.on()) this.active = true;
+	}
+}
+trigger ( ) {
+	let that = this;
+	setTimeout(function() {
+		that.active = false;
+	}, (Point.flip(20, 45)*1000));
+}
+
+ }
+
+class Axetime extends Noclip
+{
+constructor ( i, snake, game, ch, color, slow ) {
+	let art = snake.art;
+	ch = (ch) ? ch : art.axetimeCh;
+	color = (color) ? color : art.axetimeColor;
+	super( i, snake, ch, color );
+	this.game = game;
+	this.slow = slow;
+}
+trigger ( ) {
+	let that = this;
+	this.game.start();
+	
+	if (this.slow) {
+		this.game.loop = this.game.loop + ( Point.flip(30, 50) );
+	} else {
+		this.game.loop = this.game.loop - ( Point.flip(50, 150) );
+	}
+	
+	this.game.start();
+	setTimeout(function() {
+		that.game.start();
+		that.game.loop = that.game.set.timeloop;
+		that.game.start();
+		that.active = false;
+	}, (Point.flip(8, 40)*1000) );
+}
+
+ }
+ 
+class Slowtime extends Axetime
+{
+constructor ( i, snake, game  ) {
+	let art = snake.art;
+	super( i, snake, game, art.slowtimeCh, art.slowtimeColor, true );
+}
+
+ }
+ 
+class Noize
+{
+constructor( src, main ) {
+	this.audio = new Audio ( );
+	this.src = src;
+	this.main = main;
+	this.nonoize = new Box('mute');
+	this.mute = false;
+	
+	if ( navigator.onLine ) {
+		this.loop(null);
+		this.audio.onended = this.loop.bind(this);
+		this.nonoize.on( this.muted.bind(this) );
+	} else {
+		this.nonoize.disabled(true);
+	}
+	
+}
+loop ( go ) {
+	if ( go === null ) { this.index = 0; }
+	if ( go ) { this.index++; }
+	if ( this.index === this.src.length ) {
+		this.index = 0;
+	}
+	this.audio.src = Noize.path( this.src[ this.index ] );
+	if ( go ) { this.play(); }
+}
+play ( ) {
+	this.audio.play( ).catch((e) => {this.nonoize.disabled(true)});
+}
+pause ( ) {
+	if ( this.audio.duration ) {
+		this.audio.pause( );
+	}
+}
+stop ( ) {
+	if ( this.audio.duration ) {
+		this.pause();
+		this.audio.currentTime = 0;
+		this.loop(null);
+	}
+}
+muted ( ) {
+	let play = (this.main.game) ? this.main.game.time : false;
+	if ( !this.mute ) {
+		if ( play ) {
+			this.pause();
+		}
+		this.nonoize.html('&#128263;');
+		this.mute = true;
+	} else {
+		this.nonoize.html('&#128266;');
+		this.mute = false;
+		if ( play ) {
+			this.play();
+		}
+	}
+}
+static path ( key ) {
+	return `https://docs.google.com/uc?authuser=0&id=${key}&export=download`;
+}
+
+ }
+ 
+class Nextlevel extends BonBon
+{
+constructor( i, con, game, ch, color ) {
+	super(i, game.snake, ch, color);
+	this.main = game.main;
+	this.score = this.main.score;
+	this.con = con;
+}
+on ( ) {
+	if ( this.score.score > this.con ) {
+		if ( this.snake.list.length > 1 ) {
+			super.on();
+		}
+	}
+}
+trigger ( ) {
+	if (this.main.round === 2) {
+		this.main.next( 'Game Over' );
+	} else {
+		this.main.game.timer();
+		this.main.audio.stop();
+		this.main.remove();
+		this.main.score.declare(true);
+		delete this.main.game;
+		this.main.game = null;
+		setTimeout(function(){
+			display.clearDisplay();
+			main.letsgame();
+		}, 200);
+	}
+}
+
+ }
+
+/////////////////////////// * Spirit script * \\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+class Game extends Options
+{
+constructor ( type, stage, main ) {
+	super( type, stage );
+	
+	this.loop = this.set.timeloop;
+	this.time = null;
+	
+	this.timer = function () {
+		if (this.time) {
+			clearInterval(this.time);
+			this.time = false;
+		} else {
+			this.time = setInterval(function(that) {
+				that.run();
+			}, this.loop, this );
+			if ( this.barrier ) { this.barrier.out(); }
+		}
+	};
+	this.start = this.timer.bind(this);
+	this.main = main;
+	
+	this.wall = (this.set.hasWall) ? new Wall ( ) : null;
+	this.labirinte = (this.set.labirinte) ? new Labirinte ( ) : null;
+	this.barrier = (this.set.barrier) ? new Barrier ( this.set.barrierPcs, this ) : null;
+	this.snake = new Snake( this.main );
+	this.food = new Food ( this.art );
+	this.backwards = (this.set.backwards) ? new Backwards ( this.set.caseBackwards, this.snake ) : null;
+	this.droptail = (this.set.droptail) ? new Droptail ( this.set.caseDroptail, this.snake, this ) : null;
+	this.noclip = (this.set.noclip) ? new Noclip ( this.set.caseNoclip, this.snake ) : null;
+	this.axetime = (this.set.axetime) ? new Axetime ( this.set.caseAxetime, this.snake, this ) : null;
+	this.slowtime = (this.set.slowtime) ? new Slowtime ( this.set.caseSlowtime, this.snake, this ) : null;
+	this.autoaxe = (this.set.autoaxe) ? new Autoaxe ( this.snake, this ) : null;
+	this.nextlevel = (this.set.nextlevel) ? new Nextlevel ( this.set.caseNextlevel, this.set.conNextlevel, this, this.art.nextlevelCh, this.art.nextlevelColor ) : null;
+	
+	this.start();
+}
+run ( ) {
+	let noclip = (this.noclip !== null) ? this.noclip.active : this.noclip;
+	
+	this.snake.move( this.food, noclip );
+	this.snake.crash();
+	if (this.wall) { this.wall.crash(); }
+	if (this.labirinte) { this.labirinte.crash(); }
+	if (this.barrier) { this.barrier.crash(); }
+	
+	if ( !noclip ) {
+		let head = this.snake.list[0];
+		if ( (this.snake.cross()) || ((this.wall) ? this.wall.cross(head) : false) || ((this.labirinte) ? this.labirinte.cross(head) : false) || ((this.barrier) ? this.barrier.cross(head) : false) ) {
+			this.main.next('Game Over');
+		}
+	}
+	
+	if (this.autoaxe) { this.autoaxe.on(); }
+	if (this.backwards) { this.backwards.on(); }
+	if (this.droptail) { this.droptail.on(); }
+	if (this.noclip) { this.noclip.on(); }
+	if (this.axetime) { this.axetime.on(); }
+	if (this.slowtime) { this.slowtime.on(); }
+	if (this.nextlevel) { this.nextlevel.on(); }
+}
+
+ }
+
+class Wall extends Figure
+{
+constructor (  ) {
+	super();
+	this.list = [
+		...new HorizontalLine( this.disp.sizeStart, this.disp.sizeWidth, this.disp.sizeStart, this.art.wallCh, this.art.wallColor, true ).list,
+		...new HorizontalLine( this.disp.sizeStart, this.disp.sizeWidth, this.disp.sizeHeight, this.art.wallCh, this.art.wallColor, true ).list,
+		...new VerticalLine( this.disp.sizeStart, this.disp.sizeStart, this.disp.sizeHeight, this.art.wallCh, this.art.wallColor, true ).list,
+		...new VerticalLine( this.disp.sizeWidth, this.disp.sizeStart, this.disp.sizeHeight, this.art.wallCh, this.art.wallColor, true ).list
+	];
+}
+
+ }
+
+class Labirinte extends Figure
+{
+constructor(  ) {
+	super();
+	this.list = [
+		...new VerticalLine ( 0, 0, 6, this.art.wallCh, this.art.wallColor, true ).list,
+		...new HorizontalLine ( 0, 12, 0, this.art.wallCh, this.art.wallColor, true ).list,
+		...new VerticalLine ( 12, 0, 8, this.art.wallCh, this.art.wallColor, true ).list,
+		...new VerticalLine ( 35, 0, 6, this.art.wallCh, this.art.wallColor, true ).list,
+		...new HorizontalLine ( 0, 12, 27, this.art.wallCh, this.art.wallColor, true ).list,
+		
+		...new VerticalLine ( 27, 19, 27, this.art.wallCh, this.art.wallColor, true ).list,
+		...new HorizontalLine ( 27, 35, 27, this.art.wallCh, this.art.wallColor, true ).list,
+		...new VerticalLine ( 35, 23, 27, this.art.wallCh, this.art.wallColor, true ).list,
+		...new VerticalLine ( 0, 23, 27, this.art.wallCh, this.art.wallColor, true ).list,
+		...new HorizontalLine ( 27, 35, 0, this.art.wallCh, this.art.wallColor, true ).list,
+	];
+}
+
+ }
+
+class Snake extends Figure
+{
+constructor ( main ) {
+	super();
+	this.main = main;
+	this.list = Snake.born(this.disp, this.art);
+	this.axis = Snake.axis(this.list);
+	this.offset = Snake.offset(this.list, this.axis, this.disp);
+	if (this.offset > 0) this.list.reverse();
+	
+	for (let i = 0; i < this.list.length; i++) {
+		this.list[i].axis = this.axis;
+		this.list[i].offset = this.offset;
+	}
+	super.draw();
+}
+move ( food, noclip ) {
+	let x = this.list[0].x;
+	let y = this.list[0].y;
+	
+	if ( this.axis === 'x' ) {
+		x += this.offset;
+	} else if ( this.axis === 'y' ) {
+		y += this.offset;
+	}
+	
+	if ( x > this.disp.sizeWidth ) {
+		x = this.disp.sizeStart;
+	} else if ( x < this.disp.sizeStart ) {
+		x = this.disp.sizeWidth;
+	}
+	if ( y > this.disp.sizeHeight ) {
+		y = this.disp.sizeStart;
+	} else if ( y < this.disp.sizeStart ) {
+		y = this.disp.sizeHeight;
+	}
+	
+	this.list.unshift( Snake.newdot(this.art, x, y) );
+	this.list[0].axis = this.axis;
+	this.list[0].offset = this.offset;
+	this.list[ this.list.length - 1 ].reset();
+	if ( !this.eat(food) ) {
+		this.list.pop();
+	} else {
+		this.main.score.incr();
+	}
+	let head = this.list[0];
+	let back = this.list[1];
+	let ch = this.art.snakeCh;
+	let col = this.art.snakeColor;
+	if (noclip) {
+		head.ch = this.art.noclipHeadCh;
+		head.color = this.art.noclipHeadColor;
+		head.draw();
+	} else if ( head.ch !== ch || head.color !== col) {
+		head.ch = ch;
+		head.color = col;
+		head.draw();
+	}
+	if (back.ch !== ch || back.color !== col) {
+		back.ch = ch;
+		back.color = col;
+		back.draw();
+	}
+}
+eat ( o ) {
+	if ( this.tap(o) ) {
+		o.setdot();
+		return true;
+	}
+	return false;
+}
+tap ( o ) {
+	let head = this.list[0];
+	if ( o.x === head.x && o.y === head.y ) {
+		return true;
+	}
+	return false;
+}
+cross ( ) {
+	let head = this.list[0];
+	let x = head.x;
+	let y = head.y;
+	for (let i = 1; i < this.list.length; i++) {
+		let p = this.list[i];
+		if(x === p.x && y === p.y) {
+			return true;
+		}
+	}
+	return false;
+}
+control ( id ) {
+	id = id.target.id;
+	if ( id === 'up' || id === 'down' ) {
+		if ( this.axis !== 'y' ) {
+			this.axis = 'y';
+			this.offset = (id === 'up') ? -1 : 1;
+		}
+	}
+	if ( id === 'left' || id === 'right' ) {
+		if ( this.axis !== 'x' ) {
+			this.axis = 'x';
+			this.offset = (id === 'left') ? -1 : 1;
+		}
+	}
+}
+static newdot ( set, x, y ) {
+	return new Point ( x, y, set.snakeCh, set.snakeColor, true );
+}
+static born ( disp, set, pcs ) {
+	pcs = (pcs) ? pcs : 2;
+	let point = Point.newpoint(disp);
+	return ( (Point.flip()) ?
+		new VerticalLine( point.x, point.y, point.y+pcs, set.snakeCh, set.snakeColor, false ) :
+			new HorizontalLine( point.x, point.x+pcs, point.y, set.snakeCh, set.snakeColor, false ) ).list;
+}
+static axis ( arr ) {
+	let len = arr.length - 1;
+	return (arr[0].y === arr[len].y) ? 'x' : 'y';
+}
+static offset ( list, axis, disp ) {
+	let midX = Math.round(disp.sizeWidth / 2);
+	let midY = Math.round(disp.sizeHeight / 2);
+	let mid = Math.round(list.length / 2) - 1;
+	
+	if ( axis == 'x' && list[mid].x > midX || axis == 'y' && list[mid].y > midY ) {
+		return -1;
+	}
+	return 1;
+}
+
+ }
+
+class Autoaxe
+{
+constructor ( snake, game ) {
+	this.snake = snake;
+	this.game = game;
+	this.p = 0;
+}
+on ( ) {
+	let len = this.snake.list.length - 3;
+	if ( len > this.p ) {
+		this.game.timer();
+		this.game.loop = this.game.loop - 5;
+		this.game.timer();
+		this.p = len;
+	} else if ( len === 0 && this.p !== 0) {
+		this.game.timer();
+		this.game.loop = this.game.set.timeloop;
+		this.game.timer();
+		this.p = len;
+	}
+}
+
+ }
+class Obs extends Figure
+{
+constructor( game ) {
+	super();
+	this.game = game;
+	this.stat = 'wait';
+	this.list = null;
+	
+	this.delay();
+}
+delay ( ) {
+	setTimeout( (this.list) ? this.$remove.bind(this) : this.$create.bind(this), (Point.flip(5000, 60000)));
+}
+$create ( ) {
+	let art = { 
+		snakeCh : this.art.barrierWallCh,
+		snakeColor : this.art.barrierWallColor
+	};
+	this.list = Snake.born( this.disp, art, (Point.flip(2,5)) );
+	if ( !this.game.time ) {
+		this.stat = 'draw';
+	} else {
+		super.draw();
+		this.stat = 'wait';
+		this.delay();
+	}
+}
+$remove ( ) {
+	if ( this.game.time ) {
+		this.list.forEach(function(item){
+			item.reset();
+		});
+		delete this.list;
+		this.list = null;
+		this.stat = 'wait';
+		this.delay();
+	} else {
+		this.stat = 'reset';
+	}
+}
+out ( ) {
+	if ( this.stat !== 'wait' ) {
+		if ( this.stat === 'draw' ) {
+			super.draw();
+			this.stat = 'wait';
+			this.delay();
+		} else if ( this.stat === 'reset' ) {
+			this.$remove();
+		}
+	}
+}
+cross ( point ) {
+	if ( this.list ) {
+		return super.cross(point);
+	}
+	return false;
+}
+crash ( ) {
+	if ( this.list ) {
+		super.crash();
+	}
+}
+
+ }
+
+class Barrier
+{
+constructor( pcs, game ) {
+	this.pcs = pcs
+	for (let i = 0; i < pcs; i++) {
+		this[String(i)] = new Obs (game);
+	}
+}
+cross ( point ) {
+	for (let i = 0; i < this.pcs; i++) {
+		if (this[String(i)].cross(point)) {
+			return true;
+		}
+	}
+	return false;
+}
+crash ( ) {
+	for (let i = 0; i < this.pcs; i++) {
+		this[String(i)].crash()
+	}
+}
+out ( ) {
+	for (let i = 0; i < this.pcs; i++) {
+		this[String(i)].out()
+	}
+}
+
+ }
+
+/////////////////////////// * Main script * \\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+class Main
+{
+constructor ( ) {
+	let set = nameElements;
+	this.$control = new Box (set.arrowControl);
+	this.$esc = new Box (set.buttonESC);
+	this.$ok = new Box (set.buttonOK);
+	this.storage = new Storage ( );
+	this.$menu = new Tablo (set.mainMenu, this);
+	this.$pause = new Tablo (set.pauseMenu, this);
+	this.$stats = new Stats(set.screenStats, set.journalStats, this.storage, this, set.displayId);
+	this.score = new Score (set.scoreScreen, set.typegame, this);
+	this.$fin = new FinalTablo ( set.scrGameover, set.scrWin, this);
+	this.audio = new Noize ( set.srcAudio, this );
+	this.game = null;
+	this.type = null;
+	this.round = null;
+	this.start();
+}
+letsgame ( value ) {
+	if ( value ) this.type = value;
+	if ( this.type === 'stages' ) {
+		if ( typeof this.round === 'number' ) { this.round++; }
+		else this.round = 0;
+	}
+	
+	this.game = new Game ( this.type, ( (this.round !== null) ? String(this.round) : this.round ), this );
+	
+	this.score.typeOut();
+	this.score.scoreOut();
+	this.$resume();
+	this.audio.play();
+	screen.orientation.addEventListener("change", this.$request.bind(this));
+}
+$request ( ) {
+	if (this.game) {
+		if (this.game.time && Box.get('error').style.display === 'block') {
+			this.paused()
+		}
+	}
+}
+$resume ( ) {
+	this.esc = this.paused.bind(this);
+	this.$esc.on( this.esc );
+	
+	this.control = this.game.snake.control.bind(this.game.snake);
+	this.$control.on( this.control );
+}
+next ( value ) {
+	this.remove();
+	
+	if ( value === 'stats' ) {
+		this.stats();
+	} else if ( value === 'exit' ) {
+		this.exit();
+	} else if ( value === 'clear_storage' ) {
+		this.storage.clearStorage();
+		this.next('stats');
+	} else if ( value === 'back' ) {
+		( this.game ) ? this.paused() : this.start();
+	} else if ( value === 'resume' ) {
+		this.game.timer();
+		this.audio.play();
+		this.$resume();
+	} else if ( value === 'Game Over' ) {
+		this.game.timer();
+		this.audio.stop();
+		this.$fin.run();
+		this.$gameover( );
+	} else if ( value === 'start' ) {
+		this.start( );
+	} else if ( value === 'letsgame' ) {
+		this.letsgame( );
+	} else {
+		this.letsgame( value );
+	}
+}
+paused ( ) {
+	this.$pause.open();
+	this.audio.pause();
+	
+	if ( this.game.time ) {
+		this.remove();
+		this.game.timer();
+	}
+	
+	this.esc = this.$pause.control.bind(this.$pause);
+	this.$esc.on( this.esc );
+	
+	this.control = this.$pause.control.bind(this.$pause);
+	this.$control.on( this.control );
+	
+	this.ok = this.$pause.ok.bind(this.$pause);
+	this.$ok.on( this.ok );
+}
+remove ( ) {
+	this.$esc.del(this.esc);
+	this.$control.del(this.control);
+	this.$ok.del(this.ok);
+}
+end ( value ) {
+	this.remove();
+	this.audio.stop();
+	if ( this.$fin.record() ) {
+		this.$fin.win.open();
+		this.$fin.Out( );
+		this.storage.add( this.type, FinalTablo.now(), this.score.amount() );
+		this.$fin.sideOut( );
+		this.$value = value;
+		
+		this.esc = this.lastdrop.bind(this);
+		this.$esc.on( this.esc );
+		
+		this.ok = this.lastdrop.bind(this);
+		this.$ok.on( this.ok );
+	} else {
+		this.clear(value);
+		this.next(value);
+	}
+}
+lastdrop ( ) {
+	this.remove();
+	this.$fin.win.hide();
+	this.clear(this.$value);
+	this.next(this.$value);
+	delete this.$value;
+}
+start ( ) {
+	this.remove();
+	this.$menu.open();
+	
+	this.control = this.$menu.control.bind(this.$menu);
+	this.$control.on( this.control );
+	
+	this.ok = this.$menu.ok.bind(this.$menu);
+	this.$ok.on( this.ok );
+}
+stats ( ) {
+	this.$stats.open();
+	this.$stats.statsOut();
+	
+	this.esc = this.$stats.ok.bind(this.$stats);
+	this.$esc.on(this.esc );
+	
+	this.ok = this.$stats.ok.bind(this.$stats);
+	this.$ok.on(this.ok );
+	
+	this.control = this.$stats.control.bind(this.$stats);
+	this.$control.on( this.control );
+}
+$gameover ( ) {
+	this.esc = this.$fin.control.bind(this.$fin);
+	this.$esc.on(this.esc );
+	
+	this.ok = this.$fin.control.bind(this.$fin);
+	this.$ok.on(this.ok );
+}
+clear ( type ) {
+	this.score.typeOut(true);
+	delete this.game;
+	this.game = null;
+	display.clearDisplay();
+	if ( type === 'start' ) {
+		delete this.type;
+		this.type = null;
+		delete this.round;
+		this.round = null;
+		this.score.setDefault(true);
+	} else {
+		this.score.setDefault();
+	}
+}
+exit ( ) {
+	window.close();
+}
+
+ }
+ 
+class List
+{
+constructor ( inf ) {
+	if ( typeof inf !== 'string' ) {
+		for (let key in inf) {
+			this[key] = inf[key];
+		}
+	} else {
+		this.type = inf;
+		this['unknown'] = 1;
+	}
+}
+add ( name, score ) {
+	
+	this[name] = score;
+	if ( List.length(this) > 5 ) {
+		delete this[ List.findweak(this) ];
+	}
+}
+static length ( self ) {
+	return (Object.keys(self)).length;
+}
+static findweak ( self ) {
+	let weakey = Library.smalnum(self);
+	for (let key in self) {
+		if (weakey === self[key]) {
+			return key;
+		}
+	}
+}
+
+ }
+
+class Library
+{
+constructor ( obj ) {
+	if ( obj ) {
+		for (let key in obj) {
+			this[key] = new List ( obj[key] );
+		}
+	} else {
+		let spec = gameSetting;
+		let keys = Object.keys(spec);
+		for (let i = 0; i < keys.length; i++) {
+			this[(keys[i])] = new List ( spec[ (keys[i]) ]['type'] );
+			
+		}
+		this.wai = true;
+	}
+}
+record ( type, num ) {
+	let bignum = Library.bignum( this[type] );
+	if ( typeof num === 'number' ) {
+		return num > bignum;
+	}
+	return bignum;
+}
+numrange ( type, num ) {
+	let values = Library.sortAr( Object.values(this[type]) );
+	return num > values[0] || num > values[values.length-1];
+}
+getSide ( type, num ) {
+	let values = Library.sortAr( Object.values(this[type]) );
+	return values.indexOf(num) + 1;
+}
+check ( type, num ) {
+	let key = Library.keyOf(this[type], num);
+	if ( key ) {
+		delete this[type][key];
+	}
+}
+static keyOf (obj, num ) {
+	for (let key in obj) {
+		if ( num === obj[key] ) {
+			return key;
+		}
+	}
+	return null;
+}
+static bignum ( variable ) {
+	variable = Library.sortAr( Object.values(variable) );
+	return variable[0];
+}
+static smalnum ( variable ) {
+	variable = Library.sortAr( Object.values(variable), 1 );
+	return variable[0];
+}
+static sortAr ( arr, k ) {
+	arr = arr.filter(item => typeof item === 'number');
+	// k = 1 aAB | k = 0 BAa
+	arr.sort(function (a, b) {
+		if (k === 1) return a - b;
+		return b - a;
+	});
+	return arr;
+}
+
+ }
+
+class Storage
+{
+constructor ( ) {
+	this.era = new Era ('score');
+	this.storage = this.$create();
+}
+$create ( ) {
+	let storage = this.era.get();
+	if ( storage ) {
+		if (storage.wai)
+			return new Library ( storage );
+	}
+	let I = new Library ();
+	this.era.set( I );
+	return I;
+}
+clearStorage ( ) {
+	this.era.cls();
+	this.storage = this.$create();
+}
+read ( ) {
+	let html = '';
+	for (let key in this.storage) {
+		if (key !== 'wai') {
+			html += `<p class="ul_stat yellow">${(this.storage[key]).type}:</p>`;
+		}
+		let values = Library.sortAr(Object.values( this.storage[key] ));
+		values.forEach(function(item){
+			let name = Library.keyOf(this.storage[key], item);
+			html += `<p class="li_stat lime">${name} - <span class="lime">${this.storage[key][name]}</span></p>`;
+		}, this);
+		html += '<p>&nbsp;</p>';
+	}
+	return html;
+}
+add ( type, name, score ) {
+	this.storage.check(type, score);
+	
+	this.storage[type].add(name, score);
+	this.era.cls();
+	this.era.set(this.storage);
+}
+record ( type, num) {
+	return this.storage.numrange( type, num );
+}
+getSide ( type, num ) {
+	return this.storage.getSide( type, num );
+}
+
+ }
+//end script
+</script>
+<!--------------------------- ! --------------------------->
+	</head>
+	<body>
+		<div id='error'>
+			<p>
+				Для корректной работы приложения переведите устройство в портретный (вертикальный) режим.		
+			</p>
+		</div>
+		<div id="content">
+			<div id="posrel" style="position:relative;">
+				<div class="tablo" id="main_menu">
+					<h1>Игра Змейка</h1>
+					<article>Выберите тип игры</article>
+					<p class="cell" val="classic">Классическая</p>
+					<p class="cell" val="stages">С уровнями</p>
+					<p class="cell" val="marathon">Марафон</p>
+					<p class="cell" val="stats">Рекорды</p>
+					<p class="cell" val="exit">Выход</p>
+				</div>
+				<div class="tablo" id="pause_menu">
+					<h1>Пауза</h1>
+					<article>~~~~~</article>
+					<p class="cell" val="resume">Продолжить</p>
+					<p class="cell" val="stats">Рекорды</p>
+					<p class="cell" val="letsgame">Начать сначала</p>
+					<p class="cell" val="start">Главное меню</p>
+				</div>
+				<div class="tablo" id="fin">
+					<h1>Game Over</h1>
+					<article>~~~~~~~~~</article>
+					<p class="scoreart">Вы набрали</p>
+					<p class="scoreart finscore"></p>
+					<p class="scoreart">очков</p>
+					<p class="cell" val="ok">Главное меню</p>
+				</div>
+				<div class="tablo" id="winer">
+					<h1>Новый рекорд!</h1>
+					<article>~~~~~~~~~</article>
+					<p class="scoreart">Вы на <span id="scoreside"></span> месте</p>
+					<p class="scoreart">Вы набрали</p>
+					<p class="scoreart finscore"></p>
+					<p class="scoreart">очков</p>
+					<p class="cell" val="ok">ОК</p>
+				</div>
+				<div  id="stats">
+					<h1>Рекорды:</h1>
+					<article>~~~~~*~~~~~</article>
+					<p style="font-size: 6px;">&nbsp;</p>
+					<div id="statjournal"></div>
+					<p class="cell" val="back">Назад</p>
+					<p class="cell" val="clear_storage">Очистить рекорды</p>
+				</div>
+		
+				<div id="gameArea"></div>
+				<div id="scorelist">
+					<p>score&nbsp;<span id="score"></span></p>
+					<p id="typegame">wai</p>
+				</div>
+			</div>
+<script type="text/javascript">'use strict';
+/////////////////////////// * Display script * \\\\\\\\\\\\\\\\\\\\\\\\\\\
+class Display
+{
+constructor ( options ) {
+	this.$backcolor = options.background;
+	this.area = Box.get(options.nameArea);
+	this.score = Box.get('scorelist');
+	this.width = options.sizeWidth;
+	this.height = options.sizeHeight;
+	this.ch = options.pixelCh;
+	this.color = options.pixelColor;
+	this.pix = null;
+	
+	this.createDisplay();
+}
+paste ( ch, color, ) {
+	if (ch.length>1) {
+		this.area.innerHTML = ch;
+	}
+	else if (this.pix) {
+		this.pix.innerHTML = ch;
+		this.pix.className =color;
+	} else {
+		let log = `Display error: wrong call method 'paste'.\n{ pix : ${this.pix}, char : ${ch}, color : ${color} }`;
+		console.log(log);
+	}
+}
+clearDisplay ( ) {
+	let line = this.area.children;
+	for (let y = 0; y < line.length; y++) {
+		let row = line[y].children;
+		for (let x = 0; x < row.length; x++) {
+			this.setPix(x, y);
+			let ch = this.getPix();
+			if (  ch !== this.ch ) {
+				this.press();
+			}
+			this.resetPix();
+		}
+	}
+}
+createDisplay ( ) {
+	this.area.style.backgroundColor = this.$backcolor;
+	this.score.style.backgroundColor = this.$backcolor;
+	let str = '';
+	for (let y = 0; y <= this.height; y++) {
+		str += '<p class="pix">';
+		for (let x = 0; x <= this.width; x++) {
+			str += `<span class="${this.color}">${this.ch}</span>`;
+		}
+		str += '</p>';
+	}
+	this.paste(str);
+}
+press ( ch, color ) {
+	this.paste( (ch) ? ch : this.ch, (color) ? color : this.color );
+}
+setPix (x, y) {
+	this.pix = (this.area.children[y]).children[x];
+}
+resetPix () {
+	this.pix = null;
+}
+getPix () {
+	return (this.pix) ? this.pix.textContent : '';
+}
+
+ }
+
+var display = new Display( displaySetting ); //end display script
+</script>
+			<div class="control" style="position: relative;">
+				<div class="c1">
+					<button id="esc">esc</button>
+					<button class="bup" id="up">&#9650;</button>
+					<button id="mute">&#128266;</button>
+					<button id="ok">ок</button>
+				</div>
+				<div class="c2">
+					<button class="bup" id="left">&#9668;</button>
+					<button class="bup" id="right">&#9658;</button>
+				</div>
+				<div class="c3">
+					<button class="bup" id="down">&#9660;</button>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript">
+/////////////////////////// * Screen script * \\\\\\\\\\\\\\\\\\\\\\\\\\\
+class Screen
+{
+constructor ( set ) {
+	Box.get('control')[0].style.width = getComputedStyle(Box.get('posrel')).width;
+	this.$arrowControl = Box.get(set.arrowControl);
+	this.$buttonESC = Box.get(set.buttonESC);
+	this.$buttonOK = Box.get(set.buttonOK);
+	this.container = Box.get('content');
+	this.phone = null;
+	this.agent = (/Android|Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 'phone' : 'pc';
+	if ( this.agent === 'pc' ) {
+		this.keyControl();
+	} else {
+		this.request();
+	}
+}
+keyControl ( ) {
+	let that = this;
+	document.addEventListener('keydown', function(event){
+    	switch (event.keyCode) {
+    		case 27: //ESC
+    			that.$buttonESC.click();  break;
+    		case 13: //ENTER
+    			that.$buttonOK.click(); break;
+    		case 38: //ARROW UP
+    			(Box.$marker(that.$arrowControl, 'up')).click(); break;
+    		case 40: //ARROW DOWN
+    			(Box.$marker(that.$arrowControl, 'down')).click(); break;
+    		case 37: //ARROW LEFT
+    			(Box.$marker(that.$arrowControl, 'left')).click(); break;
+    		case 39: //ARROW RIGHT
+    			(Box.$marker(that.$arrowControl, 'right')).click(); break;
+    	}
+	});
+}
+request ( ) {
+	const type = (/landscape/i.test(screen.orientation.type)) ? 'landscape' : 'portrait';
+	if ( type === 'landscape' ) {
+		document.getElementById('error').style.display = 'block';
+	} 
+	screen.orientation.addEventListener("change", function() {
+		const type = (/landscape/i.test(screen.orientation.type)) ? 'landscape' : 'portrait';
+		if ( type === 'landscape' ) {
+			document.getElementById('error').style.display = 'block';
+		} else {
+			document.getElementById('error').style.display = 'none';
+		} 
+	});
+}
+px ( num ) {
+	return String(num) + 'px';
+}
+
+ } //end screen script
+var $screen = new Screen ( nameElements );
+var main = new Main ();
+</script>
+	</body>
+</html>
